@@ -1,4 +1,4 @@
-Cozy-Rainy-Recipe Application
+#Cozy-Rainy-Recipe Application
 
 Target Flow and Structure: Done,
 Component wise code apply: Pending,
