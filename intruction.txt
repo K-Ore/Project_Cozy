@@ -1,0 +1,24 @@
+Lazy Loading Implementation
+1. All pages in /pages folder are lazy-loaded
+2. Components organized for code splitting
+3. Barrel exports (index.js) for clean imports
+
+Performance Optimizations
+1. Component-level CSS modules
+2. Custom hooks for state management
+3. Context providers for global state
+4. Service layer for API caching
+5. Utility functions for reusable logic
+
+Modular Architecture
+1. Feature-based component organization
+2. Separated concerns (UI, Layout, Features)
+3. Custom hooks for business logic
+4. Service layer for API interactions
+
+Development Best Practices
+1. Consistent file naming conventions
+2. Module CSS for scoped styling
+3. Barrel exports for clean imports
+4. Separation of concerns
+5. Reusable component library
