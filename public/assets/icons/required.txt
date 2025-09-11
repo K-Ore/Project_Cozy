@@ -1,0 +1,2 @@
+favicon.ico
+app-icon.png

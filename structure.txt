@@ -1,0 +1,247 @@
+monsoon-recipe-hub/
+├── public/
+│   ├── index.html
+│   ├── manifest.json (optional,but effective to learn and implement)
+│   └── assets/
+│       ├── images/
+│       │   ├── logo.png
+│       │   ├── placeholder-recipe.jpg
+│       │   └── monsoon-bg.jpg
+│       └── icons/
+│           ├── favicon.ico
+│           └── app-icon.png
+│
+├── src/
+│   ├── components/
+│   │   ├── ui/                    
+│   │   │   ├── Button/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── Button.jsx
+│   │   │   │   └── Button.module.css
+│   │   │   ├── Input/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── Input.jsx
+│   │   │   │   └── Input.module.css
+│   │   │   ├── Modal/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── Modal.jsx
+│   │   │   │   └── Modal.module.css
+│   │   │   ├── Card/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── Card.jsx
+│   │   │   │   └── Card.module.css
+│   │   │   ├── Spinner/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── Spinner.jsx
+│   │   │   │   └── Spinner.module.css
+│   │   │   ├── ErrorBoundary/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── ErrorBoundary.jsx
+│   │   │   │   └── ErrorBoundary.module.css
+│   │   │   ├── Toast/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── Toast.jsx
+│   │   │   │   └── Toast.module.css
+│   │   │   └── index.js           # Barrel exports
+│   │   │
+│   │   ├── layout/                # Layout Components
+│   │   │   ├── Header/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── Header.jsx
+│   │   │   │   └── Header.module.css
+│   │   │   ├── Footer/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── Footer.jsx
+│   │   │   │   └── Footer.module.css
+│   │   │   ├── Navbar/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── Navbar.jsx
+│   │   │   │   └── Navbar.module.css
+│   │   │   ├── Sidebar/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── Sidebar.jsx
+│   │   │   │   └── Sidebar.module.css
+│   │   │   ├── PageContainer/
+│   │   │   │   ├── index.js
+│   │   │   │   ├── PageContainer.jsx
+│   │   │   │   └── PageContainer.module.css
+│   │   │   └── index.js
+│   │   │
+│   │   ├── features/              # Feature-specific Components
+│   │   │   ├── auth/
+│   │   │   │   ├── LoginForm/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── LoginForm.jsx
+│   │   │   │   │   └── LoginForm.module.css
+│   │   │   │   ├── RegisterForm/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── RegisterForm.jsx
+│   │   │   │   │   └── RegisterForm.module.css
+│   │   │   │   └── index.js
+│   │   │   │
+│   │   │   ├── recipes/
+│   │   │   │   ├── RecipeCard/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── RecipeCard.jsx
+│   │   │   │   │   └── RecipeCard.module.css
+│   │   │   │   ├── RecipeForm/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── RecipeForm.jsx
+│   │   │   │   │   └── RecipeForm.module.css
+│   │   │   │   ├── RecipeGrid/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── RecipeGrid.jsx
+│   │   │   │   │   └── RecipeGrid.module.css
+│   │   │   │   ├── RecipeDetail/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── RecipeDetail.jsx
+│   │   │   │   │   └── RecipeDetail.module.css
+│   │   │   │   ├── IngredientsList/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── IngredientsList.jsx
+│   │   │   │   │   └── IngredientsList.module.css
+│   │   │   │   └── index.js
+│   │   │   │
+│   │   │   ├── search/
+│   │   │   │   ├── SearchBar/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── SearchBar.jsx
+│   │   │   │   │   └── SearchBar.module.css
+│   │   │   │   ├── FilterPanel/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── FilterPanel.jsx
+│   │   │   │   │   └── FilterPanel.module.css
+│   │   │   │   ├── TagSelector/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── TagSelector.jsx
+│   │   │   │   │   └── TagSelector.module.css
+│   │   │   │   └── index.js
+│   │   │   │
+│   │   │   ├── comments/
+│   │   │   │   ├── CommentSection/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── CommentSection.jsx
+│   │   │   │   │   └── CommentSection.module.css
+│   │   │   │   ├── CommentItem/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── CommentItem.jsx
+│   │   │   │   │   └── CommentItem.module.css
+│   │   │   │   ├── CommentForm/
+│   │   │   │   │   ├── index.js
+│   │   │   │   │   ├── CommentForm.jsx
+│   │   │   │   │   └── CommentForm.module.css
+│   │   │   │   └── index.js
+│   │   │   │
+│   │   │   └── upload/
+│   │   │       ├── ImageUpload/
+│   │   │       │   ├── index.js
+│   │   │       │   ├── ImageUpload.jsx
+│   │   │       │   └── ImageUpload.module.css
+│   │   │       ├── ImagePreview/
+│   │   │       │   ├── index.js
+│   │   │       │   ├── ImagePreview.jsx
+│   │   │       │   └── ImagePreview.module.css
+│   │   │       └── index.js
+│   │   │
+│   │   └── index.js               # Main components barrel export
+│   │
+│   ├── pages/                     # Page Components (Lazy Loaded)
+│   │   ├── Home/
+│   │   │   ├── index.js
+│   │   │   ├── Home.jsx
+│   │   │   └── Home.module.css
+│   │   ├── Login/
+│   │   │   ├── index.js
+│   │   │   ├── Login.jsx
+│   │   │   └── Login.module.css
+│   │   ├── Register/
+│   │   │   ├── index.js
+│   │   │   ├── Register.jsx
+│   │   │   └── Register.module.css
+│   │   ├── Dashboard/
+│   │   │   ├── index.js
+│   │   │   ├── Dashboard.jsx
+│   │   │   └── Dashboard.module.css
+│   │   ├── CreateRecipe/
+│   │   │   ├── index.js
+│   │   │   ├── CreateRecipe.jsx
+│   │   │   └── CreateRecipe.module.css
+│   │   ├── Recipe/
+│   │   │   ├── index.js
+│   │   │   ├── Recipe.jsx
+│   │   │   └── Recipe.module.css
+│   │   ├── Profile/
+│   │   │   ├── index.js
+│   │   │   ├── Profile.jsx
+│   │   │   └── Profile.module.css
+│   │   ├── Search/
+│   │   │   ├── index.js
+│   │   │   ├── Search.jsx
+│   │   │   └── Search.module.css
+│   │   ├── NotFound/
+│   │   │   ├── index.js
+│   │   │   ├── NotFound.jsx
+│   │   │   └── NotFound.module.css
+│   │   └── index.js
+│   │
+│   ├── hooks/                     # Custom Hooks
+│   │   ├── useAuth.js             # Authentication logic
+│   │   ├── useRecipes.js          # Recipe management
+│   │   ├── useSearch.js           # Search functionality
+│   │   ├── useComments.js         # Comments management
+│   │   ├── useLocalStorage.js     # Local storage operations
+│   │   ├── useDebounce.js         # Input debouncing
+│   │   ├── useInfiniteScroll.js   # Infinite scrolling
+│   │   ├── useImageUpload.js      # Image upload handling
+│   │   ├── useFetch.js            # Generic fetch hook
+│   │   ├── useForm.js             # Form state management
+│   │   └── index.js
+│   │
+│   ├── contexts/                  # React Contexts
+│   │   ├── AuthContext.js         # User authentication state
+│   │   ├── RecipeContext.js       # Recipe data management
+│   │   ├── ThemeContext.js        # Theme management
+│   │   ├── NotificationContext.js # Toast notifications
+│   │   └── index.js
+│   │
+│   ├── services/                  # API Services
+│   │   ├── api.js                 # Base API configuration
+│   │   ├── authService.js         # Authentication API calls
+│   │   ├── recipeService.js       # Recipe CRUD operations
+│   │   ├── commentService.js      # Comment operations
+│   │   ├── uploadService.js       # File upload service
+│   │   ├── searchService.js       # Search API calls
+│   │   └── index.js
+│   │
+│   ├── utils/                     # Utility Functions
+│   │   ├── constants.js           # App constants
+│   │   ├── helpers.js             # Helper functions
+│   │   ├── validation.js          # Form validation
+│   │   ├── formatters.js          # Data formatters
+│   │   ├── storage.js             # Storage utilities
+│   │   ├── api-utils.js           # API utilities
+│   │   └── index.js
+│   │
+│   ├── styles/                    # Global Styles
+│   │   ├── globals.css            # Global CSS reset and base styles
+│   │   ├── variables.css          # CSS custom properties
+│   │   ├── themes/
+│   │   │   ├── light.css
+│   │   │   ├── dark.css
+│   │   │   └── monsoon.css
+│   │   ├── utilities.css          # Utility classes
+│   │   └── animations.css         # CSS animations
+│   │
+│   ├── App.jsx                    # Main App component
+│   ├── App.module.css             # App-level styles
+│   ├── index.js                   # React DOM entry point
+│   └── index.css                  # Root styles
+│
+├── package.json
+├── package-lock.json
+├── vite.config.js                 # Vite configuration
+├── .env                           # Environment variables
+├── .env.example                   # Environment variables template
+├── .gitignore
+├── README.md
+└── jsconfig.json                  # JavaScript configuration

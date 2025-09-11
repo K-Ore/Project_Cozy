@@ -1,0 +1,3 @@
+logo.png
+placeholder-recipe.jpg
+monsoon-bg.jpg
