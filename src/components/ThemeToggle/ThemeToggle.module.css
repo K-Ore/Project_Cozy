@@ -1,0 +1,72 @@
+.themeToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--border-color);
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.themeToggle:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.toggleTrack {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  background: var(--toggle-track);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.toggleThumb {
+  position: absolute;
+  top: 2px;
+  left: var(--thumb-position, 2px);
+  width: 16px;
+  height: 16px;
+  background: var(--toggle-thumb);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: var(--thumb-icon-color);
+}
+
+.sunWithClouds {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cloudIcon {
+  position: absolute;
+  top: -2px;
+  right: -3px;
+  opacity: 0.8;
+}
+
+.themeLabel {
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+[data-theme="light"] .toggleTrack {
+  --thumb-position: 22px;
+}
+
+[data-theme="dark"] .toggleTrack {
+  --thumb-position: 2px;
+}

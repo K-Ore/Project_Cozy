@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight } from 'lucide-react';
+import { useTheme } from '../../contexts/ThemeContext';
 import styles from './AuthPage.module.css';
 
 const AuthPage = ({ onLogin, onRegister }) => {
@@ -7,6 +8,7 @@ const AuthPage = ({ onLogin, onRegister }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { theme } = useTheme();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -92,7 +94,7 @@ const AuthPage = ({ onLogin, onRegister }) => {
     setLoading(true);
     
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
       if (isLogin) {
         onLogin?.(formData);

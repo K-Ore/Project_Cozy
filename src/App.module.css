@@ -1,8 +1,23 @@
 .appContainer {
   display: flex;
-  background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+  background: var(--bg-primary);
   min-height: 100vh;
   position: relative;
+  transition: all 0.3s ease;
+}
+
+.globalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 200, 255, 0.08) 0%, transparent 50%);
+  z-index: -1;
+  animation: backgroundPulse 20s ease-in-out infinite;
 }
 
 .globalRainfallContainer {
@@ -22,7 +37,7 @@
   height: 12px;
   background: linear-gradient(
     to bottom,
-    rgba(173, 216, 230, 0.6) 0%,
+    var(--raindrop-color) 0%,
     rgba(135, 206, 235, 0.4) 30%,
     rgba(82, 135, 178, 0.3) 60%,
     transparent 100%
@@ -39,7 +54,7 @@
   left: -0.5px;
   width: 2px;
   height: 3px;
-  background: rgba(173, 216, 230, 0.7);
+  background: var(--raindrop-color);
   border-radius: 50%;
 }
 
@@ -57,6 +72,17 @@
   100% {
     transform: translateY(100vh) translateX(10px) rotate(10deg);
     opacity: 0;
+  }
+}
+
+@keyframes backgroundPulse {
+  0%, 100% { 
+    opacity: 0.8; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.05); 
   }
 }
 
@@ -79,6 +105,11 @@
   box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
 }
 
+.navigationToggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
 .navigationToggle.expanded {
   left: 20rem;
 }
@@ -91,6 +122,7 @@
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   z-index: 2;
+  min-height: 100vh;
 }
 
 .contentWrapper.withNavigation {
@@ -112,36 +144,59 @@
 .pageContainer {
   position: relative;
   z-index: 3;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .pageWrapper {
   position: relative;
   z-index: 4;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .maxWidthLarge {
-  max-width: 100vw;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
 }
 
 .maxWidthMedium {
-  max-width: 100vw;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
 }
 
 .paddingDefault {
   padding: 2rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+  .contentWrapper.withNavigation,
+  .contentWrapper.fullWidth {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 70px;
+  }
+  
   .navigationToggle {
     display: none;
   }
-  
+}
+
+@media (max-width: 768px) {
   .contentWrapper.mobileContent {
     margin-top: 70px;
+  }
+  
+  .paddingDefault {
+    padding: 1.5rem;
   }
   
   .globalRaindrop:nth-child(n+60) {
@@ -161,4 +216,49 @@
   .globalRaindrop:nth-child(n+40) {
     display: none;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .globalRaindrop,
+  .globalBackground,
+  .navigationToggle {
+    animation: none;
+  }
+  
+  .globalRainfallContainer {
+    display: none;
+  }
+}
+
+/* Light theme specific overrides */
+[data-theme="light"] .globalBackground {
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(174, 214, 241, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(133, 193, 233, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(85, 139, 168, 0.15) 0%, transparent 50%);
+}
+
+[data-theme="light"] .globalRaindrop {
+  background: linear-gradient(
+    to bottom,
+    var(--raindrop-color) 0%,
+    rgba(85, 139, 168, 0.4) 30%,
+    rgba(52, 73, 94, 0.3) 60%,
+    transparent 100%
+  );
+}
+
+[data-theme="light"] .globalRaindrop::before {
+  background: var(--raindrop-color);
+}
+
+[data-theme="light"] .navigationToggle {
+  background: linear-gradient(135deg, rgba(85, 139, 168, 0.9), rgba(52, 73, 94, 0.9));
+  border: 1px solid rgba(85, 139, 168, 0.3);
+  box-shadow: 0 4px 16px rgba(85, 139, 168, 0.3);
+  color: white;
+}
+
+[data-theme="light"] .navigationToggle:hover {
+  box-shadow: 0 6px 20px rgba(85, 139, 168, 0.4);
 }

@@ -1,17 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Navigation from './components/layout/Navigation/Navigation';
-import MobileNavigation from './components/layout/MobileNavigation/MobileNavigation';
-import Home from './pages/Home/Home';
-import Explore from './pages/Recipe/Explore';
-import Search from './pages/Search/Search';
-import AuthPage from './pages/AuthPage/AuthPage';
-import Dashboard from './pages/Dashboard/Dashboard';
-import CreateRecipe from './pages/CreateRecipe/CreateRecipe';
-import Profile from './pages/Profile/Profile';
-import NotFound from './pages/NotFound/NotFound';
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { Menu, X } from 'lucide-react';
 import styles from './App.module.css';
+
+const Home = lazy(() => import('./pages/Home/Home'));
+const Explore = lazy(() => import('./pages/Recipe/Explore'));
+const Search = lazy(() => import('./pages/Search/Search'));
+const AuthPage = lazy(() => import('./pages/AuthPage/AuthPage'));
+const Dashboard = lazy(() => import('./pages/Dashboard/Dashboard'));
+const CreateRecipe = lazy(() => import('./pages/CreateRecipe/CreateRecipe'));
+const Profile = lazy(() => import('./pages/Profile/Profile'));
+const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
+const ClickSpark = lazy(() => import('./components/ui/libraries/ClickSpark/ClickSpark'));
 
 const GlobalRainfall = () => {
   const generateRaindrops = () => {
@@ -97,21 +100,18 @@ function AppContent() {
 
   return (
     <div className={styles.appContainer}>
-      <GlobalRainfall />
-      
-      <div className={styles.globalBackground}></div>
+      <Suspense fallback={<div>Loading effects...</div>}>
+        <ClickSpark
+          sparkColor='#cbfff3ff'
+          sparkSize={10}
+          sparkRadius={25}
+          sparkCount={8}
+          duration={400}
+        >
+          <GlobalRainfall />
+          
+          <div className={styles.globalBackground}></div>
 
-      {isMobile ? (
-        <MobileNavigation 
-          currentView={currentView} 
-          setCurrentView={handleNavigation}
-          isLoggedIn={isLoggedIn}
-          userInfo={userInfo}
-          onConnect={handleConnect}
-          onLogout={handleLogout}
-        />
-      ) : (
-        <>
           <button 
             className={`${styles.navigationToggle} ${isNavigationCollapsed ? styles.collapsed : styles.expanded}`}
             onClick={toggleNavigation}
@@ -130,85 +130,87 @@ function AppContent() {
               onLogout={handleLogout}
             />
           )}
-        </>
-      )}
-      
-      <div className={`${styles.contentWrapper} ${
-        isMobile ? styles.mobileContent : 
-        (isNavigationCollapsed ? styles.fullWidth : styles.withNavigation)
-      }`}>
-        <div className={styles.pageContainer}>
-          <Routes>
-            <Route 
-              path="/" 
-              element={
-                <div className={`${styles.pageWrapper} ${styles.maxWidthLarge} ${styles.paddingDefault}`}>
-                  <Home setCurrentView={handleNavigation} />
-                </div>
-              } 
-            />
-            <Route 
-              path="/explore" 
-              element={
-                <div className={`${styles.pageWrapper} ${styles.maxWidthLarge} ${styles.paddingDefault}`}>
-                  <Explore setCurrentView={handleNavigation} />
-                </div>
-              } 
-            />
-            <Route 
-              path="/search" 
-              element={
-                <div className={`${styles.pageWrapper} ${styles.maxWidthMedium} ${styles.paddingDefault}`}>
-                  <Search setCurrentView={handleNavigation} />
-                </div>
-              } 
-            />
-            <Route 
-              path="/auth" 
-              element={
-                <div className={`${styles.pageWrapper} ${styles.maxWidthMedium} ${styles.paddingDefault}`}>
-                  <AuthPage 
-                    onLogin={handleLogin}
-                    onRegister={handleRegister}
+          
+          <div className={`${styles.contentWrapper} ${
+            isMobile ? styles.mobileContent : 
+            (isNavigationCollapsed ? styles.fullWidth : styles.withNavigation)
+          }`}>
+            <div className={styles.pageContainer}>
+              <Suspense fallback={<LoadingSpinner />}>
+                <Routes>
+                  <Route 
+                    path="/" 
+                    element={
+                      <div className={`${styles.pageWrapper} ${styles.maxWidthLarge} ${styles.paddingDefault}`}>
+                        <Home setCurrentView={handleNavigation} />
+                      </div>
+                    } 
                   />
-                </div>
-              } 
-            />
-            <Route 
-              path="/dashboard" 
-              element={
-                <div className={`${styles.pageWrapper} ${styles.maxWidthLarge} ${styles.paddingDefault}`}>
-                  <Dashboard userInfo={userInfo} setCurrentView={handleNavigation} />
-                </div>
-              } 
-            />
-            <Route 
-              path="/createRecipe" 
-              element={
-                <div className={`${styles.pageWrapper} ${styles.maxWidthMedium} ${styles.paddingDefault}`}>
-                  <CreateRecipe setCurrentView={handleNavigation} />
-                </div>
-              } 
-            />
-            <Route 
-              path="/profile" 
-              element={
-                <div className={`${styles.pageWrapper} ${styles.maxWidthMedium} ${styles.paddingDefault}`}>
-                  <Profile userInfo={userInfo} setCurrentView={handleNavigation} />
-                </div>
-              } 
-            />
-            <Route 
-              path="*" 
-              element={
-                <div className={`${styles.pageWrapper} ${styles.maxWidthMedium} ${styles.paddingDefault}`}>
-                  <NotFound setCurrentView={handleNavigation} />
-                </div>
-              } 
-            />
-          </Routes>
-        </div>
-      </div>
+                  <Route 
+                    path="/explore" 
+                    element={
+                      <div className={`${styles.pageWrapper} ${styles.maxWidthLarge} ${styles.paddingDefault}`}>
+                        <Explore setCurrentView={handleNavigation} />
+                      </div>
+                    } 
+                  />
+                  <Route 
+                    path="/search" 
+                    element={
+                      <div className={`${styles.pageWrapper} ${styles.maxWidthMedium} ${styles.paddingDefault}`}>
+                        <Search setCurrentView={handleNavigation} />
+                      </div>
+                    } 
+                  />
+                  <Route 
+                    path="/auth" 
+                    element={
+                      <div className={`${styles.pageWrapper} ${styles.maxWidthMedium} ${styles.paddingDefault}`}>
+                        <AuthPage 
+                          onLogin={handleLogin}
+                          onRegister={handleRegister}
+                        />
+                      </div>
+                    } 
+                  />
+                  <Route 
+                    path="/dashboard" 
+                    element={
+                      <div className={`${styles.pageWrapper} ${styles.maxWidthLarge} ${styles.paddingDefault}`}>
+                        <Dashboard userInfo={userInfo} setCurrentView={handleNavigation} />
+                      </div>
+                    } 
+                  />
+                  <Route 
+                    path="/createRecipe" 
+                    element={
+                      <div className={`${styles.pageWrapper} ${styles.maxWidthMedium} ${styles.paddingDefault}`}>
+                        <CreateRecipe setCurrentView={handleNavigation} />
+                      </div>
+                    } 
+                  />
+                  <Route 
+                    path="/profile" 
+                    element={
+                      <div className={`${styles.pageWrapper} ${styles.maxWidthMedium} ${styles.paddingDefault}`}>
+                        <Profile userInfo={userInfo} setCurrentView={handleNavigation} />
+                      </div>
+                    } 
+                  />
+                  <Route 
+                    path="*" 
+                    element={
+                      <div className={`${styles.pageWrapper} ${styles.maxWidthMedium} ${styles.paddingDefault}`}>
+                        <NotFound setCurrentView={handleNavigation} />
+                      </div>
+                    } 
+                  />
+                </Routes>
+              </Suspense>
+            </div>
+          </div>
+        </ClickSpark>
+      </Suspense>
     </div>
   );
 }
@@ -216,7 +218,9 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
